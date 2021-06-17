@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.MainActivity">
+    android:id="@+id/allJoystick"
+    tools:context=".views.Joystick">
         <View
             android:id="@+id/bigJoystickView"
             android:layout_width="393dp"
