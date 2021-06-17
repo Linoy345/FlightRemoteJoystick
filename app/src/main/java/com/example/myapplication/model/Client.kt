@@ -1,4 +1,4 @@
-package model
+package com.example.myapplication.model
 
 import java.io.OutputStream
 import java.net.InetSocketAddress
