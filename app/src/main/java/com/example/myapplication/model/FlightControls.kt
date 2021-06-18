@@ -14,8 +14,11 @@ class FlightControls {
     fun getThrottle() : Float{
         return this.throttle
     }
-    fun getJoystick() : Pair<Float,Float>{
-        return this.joystick
+    fun getAileron() : Float{
+        return this.joystick.first
+    }
+    fun getElevator() : Float{
+        return this.joystick.second
     }
     fun setRudder(newValue: Float){
         this.rudder = newValue

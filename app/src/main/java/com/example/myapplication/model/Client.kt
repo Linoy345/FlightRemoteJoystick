@@ -22,7 +22,7 @@ class Client() {
             writer = client.getOutputStream()
         }
     }
-    fun close(){
+    fun disconnect(){
         client.close()
     }
     fun write(message: String){
