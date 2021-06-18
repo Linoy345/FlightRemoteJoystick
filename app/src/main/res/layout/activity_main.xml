@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    app:layoutDescription="@xml/activity_main_scene"
+    tools:context=".views.MainActivity">
 
 
     <ImageView
+
         android:id="@+id/im1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/airplane"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-16dp" />
-
-
-    <!--<com.example.myapplication.Joystick
-        android:id="@+id/joystick"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"/>-->
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/welcome"
@@ -104,7 +99,6 @@
         android:id="@+id/Port"
         android:layout_width="100dp"
         android:layout_height="48dp"
-
         android:layout_centerVertical="true"
         android:text="Port"
         android:textColor="#000000"
@@ -112,7 +106,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.245" />
@@ -125,17 +119,8 @@
         android:layout_marginTop="625dp"
         android:layout_marginEnd="33dp"
         android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <SeekBar
-        android:id="@+id/throttle"
-        android:layout_width="110dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="201dp"
-        android:rotation="-90"
+        android:max="1"
+        android:min="-1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -143,5 +128,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <SeekBar
+        android:id="@+id/throttle"
+        android:layout_width="317dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="444dp"
+        android:layout_marginBottom="207dp"
+        android:max="1"
+        android:min="0"
+        android:rotation="-90"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-115dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

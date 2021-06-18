@@ -7,12 +7,6 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
-    apply plugin: 'kotlin-kapt'
-
-    dataBinding {
-        enabled = true
-    }
-
     defaultConfig {
         applicationId "com.example.myapplication"
         minSdkVersion 19
@@ -39,10 +33,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.activity:activity-ktx:1.2.3'
-
-
-
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
