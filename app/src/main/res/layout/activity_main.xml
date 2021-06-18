@@ -9,7 +9,6 @@
 
 
     <ImageView
-
         android:id="@+id/im1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -89,7 +88,20 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="140dp"
         android:layout_marginTop="240dp"
-        android:text="Connect "
+        android:text="Connect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/disconnectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="240dp"
+        android:text="Disconnect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,5 +153,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-115dp" />
 
+    <com.example.myapplication.views.Joystick
+        android:id="@+id/joystickView"
+        android:layout_width="260dp"
+        android:layout_height="167dp"
+        android:foregroundGravity="center"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="398dp" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
