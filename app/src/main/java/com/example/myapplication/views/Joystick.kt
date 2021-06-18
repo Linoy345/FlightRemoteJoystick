@@ -26,7 +26,7 @@ class Joystick : View {
 
     //todo set the joystick state according to aileron+elevator
 
-    var aileron:Float = 500.0F
+    var aileron:Float = 400F
     var elevator:Float = 400F
     var radius:Float = 300F
 

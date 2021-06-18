@@ -7,6 +7,4 @@
     android:id="@+id/allJoystick"
     tools:context=".views.Joystick">
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

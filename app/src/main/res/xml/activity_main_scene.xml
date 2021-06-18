@@ -13,9 +13,9 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            motion:layout_editor_absoluteY="45dp"
+            motion:layout_editor_absoluteY="-1dp"
             android:layout_height="match_parent"
-            motion:layout_editor_absoluteX="16dp"
+            motion:layout_editor_absoluteX="-1dp"
             android:layout_width="match_parent"
             android:id="@+id/im1" />
         <Constraint
@@ -42,7 +42,7 @@
         <Constraint
             motion:layout_editor_absoluteY="324dp"
             android:layout_height="301dp"
-            motion:layout_editor_absoluteX="33dp"
+            motion:layout_editor_absoluteX="59dp"
             android:layout_width="314dp"
             android:id="@+id/joystickView" />
     </ConstraintSet>
