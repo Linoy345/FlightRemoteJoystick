@@ -37,20 +37,27 @@ class Joystick : View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
         var paint = Paint()
         paint.color = Color.BLACK
         canvas.drawCircle(aileron, elevator, radius, paint)
-
+        //paint.color = Color.GRAY
+        //canvas.drawCircle(400F, 400F, 120F, paint)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-
-        val eventAction = event.action
-        val x = event.x //todo send as rudder to vm
-        val y = event.y //todo send as throttle to vm
-        setVal(x,y)
+        if(event == null) {
+            return true;
+        }
+        when (event?.action) {
+            MotionEvent.ACTION_MOVE -> touchMove(event.x, event.y)
+        }
         return true;
     }
+
+    private fun touchMove(x:Float, y:Float) {
+        setVal(x,y) //todo vm
+    }
+
+
 
 }

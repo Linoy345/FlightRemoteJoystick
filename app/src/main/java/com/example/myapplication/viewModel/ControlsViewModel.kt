@@ -1,5 +1,5 @@
 package com.example.myapplication.viewModel
-
+//import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.model.FlightModel
 
@@ -43,6 +43,7 @@ open class ControlsViewModel : ViewModel() {
     fun VM_Connect(ip: String, port: Int){
         this.model.connect(ip, port)
     }
+
     fun VM_Disconnect(){
         this.model.disconnect()
     }
