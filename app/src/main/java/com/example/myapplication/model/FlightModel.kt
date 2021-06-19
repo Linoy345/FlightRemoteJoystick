@@ -1,15 +1,18 @@
 package com.example.myapplication.model
 
+import java.util.concurrent.Executors
+
 class FlightModel()  {
     private var simulator: Client= Client()
     private var controlsInfo: FlightControls = FlightControls()
+    private var executor = Executors.newSingleThreadExecutor()
 
     var aileron: Float
-        get() {
+         get() {
             return this.controlsInfo.getAileron()
         }
         set(value) {
-            this.controlsInfo.setAileron(value)
+            executor.execute { this.controlsInfo.setAileron(value) }
         }
 
     var elevator: Float
@@ -17,33 +20,33 @@ class FlightModel()  {
             return this.controlsInfo.getElevator()
         }
         set(value) {
-            this.controlsInfo.setElevator(value)
+            executor.execute{this.controlsInfo.setElevator(value)}
         }
     var rudder: Float
         get() {
             return this.controlsInfo.getRudder()
         }
         set(value) {
-            this.controlsInfo.setRudder(value)
+            executor.execute {this.controlsInfo.setRudder(value)}
         }
     var throttle: Float
         get() {
             return this.controlsInfo.getThrottle()
         }
         set(value) {
-            this.controlsInfo.setThrottle(value)
+            executor.execute {this.controlsInfo.setThrottle(value)}
         }
 
     fun connect(ip: String, port: Int) {
-        this.simulator.connect(ip, port)
+        executor.execute {this.simulator.connect(ip, port)}
     }
 
     fun disconnect() {
-        this.simulator.disconnect()
+        executor.execute{ this.simulator.disconnect()}
     }
 
     fun setSimulator(part: String) {
-        this.simulator.write(this.controlsInfo.constructSetMessage(part))
+        executor.execute{ this.simulator.write(this.controlsInfo.constructSetMessage(part))}
     }
 
 }

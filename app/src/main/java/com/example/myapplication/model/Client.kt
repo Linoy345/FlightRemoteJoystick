@@ -3,12 +3,12 @@ package com.example.myapplication.model
 import java.io.OutputStream
 import java.net.InetSocketAddress
 import java.net.Socket
+import java.util.concurrent.Executors
 
 //TODO: Test this class.
 class Client() {
     private  var client: Socket = Socket()
     private lateinit var writer: OutputStream
-
     constructor(ip: String, port: Int) : this() {
             client.connect(InetSocketAddress(ip, port))
             writer = client.getOutputStream()
