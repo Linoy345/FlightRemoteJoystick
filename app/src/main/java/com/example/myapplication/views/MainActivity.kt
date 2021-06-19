@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var portUser:EditText
     lateinit var connButton: Button
     lateinit var disconnButton: Button
+    lateinit var joystick: Joystick
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         ipUser = findViewById(R.id.ipText)
         connButton = findViewById(R.id.ConnectButton)
         disconnButton = findViewById(R.id.disconnectButton)
+        joystick = findViewById(R.id.joystickView)
 
         ipUser.setOnClickListener{
            ip = ipUser.text.toString()
@@ -41,7 +43,6 @@ class MainActivity : AppCompatActivity() {
             v.VM_Disconnect()
         }
 
-       // binding.viewModel = v
 
         var widthRudder:Float = (binding.rudder.width.toFloat()
                 - binding.rudder.paddingLeft.toFloat()
@@ -56,33 +57,15 @@ class MainActivity : AppCompatActivity() {
             binding.throttleUser = binding.throttle.paddingLeft.toFloat() + widthThrottle * throttle.progress.toFloat() / throttle.max.toFloat();
         }*/
 
-        /*
-        joystick = findViewById(R.id.allJoystick);
-        ip = findViewById(R.id.ipText);
-        port = findViewById(R.id.portText);
-        buttonDisconnect = findViewById(R.id.disconnectButton);
-        rudder = findViewById(R.id.rudder);
-        throttle = findViewById(R.id.throttle);
+
+        /*val a:Float
+        val e:Float
+
+        joystick.service.onChange(a, e) = { a, e ->
+            v.VM_Aileron = a
+            v.VM_Elevator = e
+        }*/
 
 
-
-        buttonDisconnect.setOnClickListener {
-            //vm.VM_Disconnect()
-        }
-
-        rudder.setOnClickListener {
-           //vm.VM_Rudder = vm.VM_Rudder + rudder.progress
-        }
-
-        throttle.setOnClickListener(){
-            //vm.VM_Throttle = vm.VM_Throttle + throttle.progress
-        }
-       // joystick.onTouchEvent() //todo get the new param
-
-        //joystick.onchange=(a,e) {//todo send the param to vm
-            //vm.VM_Aileron = a
-            //vm.VM_Elevator = e
-        //}
-        */
     }
 }
