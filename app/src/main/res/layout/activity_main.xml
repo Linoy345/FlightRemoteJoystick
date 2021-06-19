@@ -8,18 +8,7 @@
         <variable
             name="viewModel"
             type="com.example.myapplication.viewModel.ControlsViewModel"/>
-        <variable
-            name="ipUser"
-            type="String"/>
-        <variable
-            name="portUser"
-            type="Integer"/>
-        <variable
-            name="rudderUser"
-            type="Float"/>
-        <variable
-            name="throttleUser"
-            type="Float"/>
+
 
     </data>
 
@@ -66,7 +55,7 @@
             app:layout_constraintHorizontal_bias="0.84"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.254"/>
+            app:layout_constraintVertical_bias="0.254" />
 
         <TextView
             android:id="@+id/IP"
@@ -110,7 +99,6 @@
             android:layout_marginStart="140dp"
             android:layout_marginTop="240dp"
             android:text="Connect"
-            android:onClick="@{() -> viewModel.VM_Connect(ipUser, portUser)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +111,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="140dp"
             android:layout_marginTop="240dp"
-            android:onClick="@{() -> viewModel.VM_Disconnect()}"
             android:text="Disconnect"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -156,7 +143,6 @@
             android:layout_marginBottom="28dp"
             android:max="1"
             android:min="-1"
-            android:onClick="@{() -> viewModel.setVM_Rudder(rudderUser)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -172,7 +158,6 @@
             android:layout_marginBottom="207dp"
             android:max="1"
             android:min="0"
-            android:onClick="@{() -> viewModel.setVM_Throttle(throttleUser)}"
             android:rotation="-90"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

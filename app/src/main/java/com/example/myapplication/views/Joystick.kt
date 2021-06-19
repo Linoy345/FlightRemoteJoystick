@@ -1,5 +1,4 @@
 package com.example.myapplication.views
-
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -7,6 +6,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import kotlin.math.*
 
 class Joystick : View {
 
@@ -24,24 +24,31 @@ class Joystick : View {
         //do stuff that was in your original constructor...
     }
 
-    //todo set the joystick state according to aileron+elevator
+    private var centerX = 0
+    private var centerY = 0
+    private var bigRadius = 0
+    private var littleRadius = 0
 
-    var aileron:Float = 400F
-    var elevator:Float = 400F
-    var radius:Float = 300F
+   private fun setup() {
+       this.centerX = (width / 2)
+       this.centerY = (height / 2)
+       this.bigRadius = min(width, height) / 3
+       this.littleRadius = min(width, height) / 5
 
-    private fun setVal(newAil:Float, newElev:Float) {
-        this.aileron = newAil
-        this.elevator = newElev
+   }
+
+
+    fun drawJoystick(x:Float, y:Float, canvas: Canvas) {
+        var paint = Paint()
+        paint.color = Color.BLACK
+        canvas.drawCircle(400F, 400F, 300F, paint)
+        paint.color = Color.GRAY
+        canvas.drawCircle(x, y, 100F, paint)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        var paint = Paint()
-        paint.color = Color.BLACK
-        canvas.drawCircle(aileron, elevator, radius, paint)
-        //paint.color = Color.GRAY
-        //canvas.drawCircle(400F, 400F, 120F, paint)
+        //drawJoystick(aileron,elevator,canvas)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -55,7 +62,7 @@ class Joystick : View {
     }
 
     private fun touchMove(x:Float, y:Float) {
-        setVal(x,y) //todo vm
+        //setVal(x,y) //todo vm
     }
 
 

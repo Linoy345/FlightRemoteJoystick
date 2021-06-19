@@ -40,8 +40,8 @@ open class ControlsViewModel : ViewModel() {
             model.setSimulator("throttle")
         }
 
-    fun VM_Connect(ip: String, port: Int){
-        this.model.connect(ip, port)
+    fun VM_Connect(ip: String, port: String){
+       this.model.connect(ip, port.toInt())
     }
 
     fun VM_Disconnect(){
