@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         var aileron:Float = joystick.getcenterX()
         var elevator:Float = joystick.getcenterY()
-
+        //check this
         joystick.service.onChange(aileron, elevator) -> {
             vm.VM_Aileron = aileron
             vm.VM_Elevator = elevator
