@@ -49,4 +49,7 @@ class FlightModel()  {
         executor.execute{ this.simulator.write(this.controlsInfo.constructSetMessage(part))}
     }
 
+    fun resetControls() {
+        executor.execute{ this.controlsInfo.resetControls()}
+    }
 }

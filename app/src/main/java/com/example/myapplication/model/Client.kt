@@ -23,7 +23,9 @@ class Client() {
         }
     }
     fun disconnect(){
-        client.close()
+        if(this.isConnected()) {
+            client.close()
+        }
     }
     fun write(message: String){
         if(this.isConnected()) {

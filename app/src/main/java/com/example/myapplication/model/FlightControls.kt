@@ -1,12 +1,19 @@
 package com.example.myapplication.model
 
+val DEFAULT_RUDDER = 0f
+val DEFAULT_THROTTLE = 0f
+val DEFAULT_AILERON = 0f
+val DEFAULT_ELEVATOR = 0f
+
+
+
 /*
     Handle and store plane controls value.
 */
 class FlightControls {
-    private var rudder : Float = 0f
-    private var throttle : Float = 0f
-    private var joystick : Pair<Float,Float> = Pair(0f,0f)
+    private var rudder : Float = DEFAULT_RUDDER
+    private var throttle : Float = DEFAULT_THROTTLE
+    private var joystick : Pair<Float,Float> = Pair(DEFAULT_AILERON, DEFAULT_ELEVATOR)
 
     fun getRudder() : Float{
         return this.rudder
@@ -31,6 +38,12 @@ class FlightControls {
     }
     fun setElevator(newValue: Float){
         this.joystick = this.joystick.copy(second = newValue)
+    }
+    fun resetControls(){
+        setRudder(DEFAULT_RUDDER)
+        setThrottle(DEFAULT_THROTTLE)
+        setAileron(DEFAULT_AILERON)
+        setElevator(DEFAULT_ELEVATOR)
     }
 
 /*

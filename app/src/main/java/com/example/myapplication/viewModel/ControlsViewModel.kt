@@ -1,7 +1,7 @@
 package com.example.myapplication.viewModel
-//import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.model.FlightModel
+import java.util.concurrent.Executors
 
 open class ControlsViewModel : ViewModel() {
     var model: FlightModel = FlightModel()
@@ -46,5 +46,6 @@ open class ControlsViewModel : ViewModel() {
 
     fun VM_Disconnect(){
         this.model.disconnect()
+        this.model.resetControls()
     }
 }
