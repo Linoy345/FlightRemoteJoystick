@@ -1,6 +1,10 @@
 package com.example.myapplication.views
 import android.os.Bundle
-import android.widget.*
+import android.view.MotionEvent
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.R
@@ -8,17 +12,17 @@ import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.viewModel.ControlsViewModel
 
 class MainActivity : AppCompatActivity() {
-    var vm = ControlsViewModel()
+    private var vm = ControlsViewModel()
 
     private lateinit var binding: ActivityMainBinding     // variable that we shall initialize at a later point in code
 
-    lateinit var ipUser: EditText
-    lateinit var portUser: EditText
-    lateinit var connButton: Button
-    lateinit var disconnButton: Button
-    lateinit var joystick: Joystick
-    lateinit var rudderSeekBar: SeekBar
-    lateinit var throttleSeekBar: SeekBar
+    private lateinit var ipUser: EditText
+    private lateinit var portUser: EditText
+    private lateinit var connButton: Button
+    private lateinit var disconnButton: Button
+    private lateinit var joystick: Joystick
+    private lateinit var rudderSeekBar: SeekBar
+    private lateinit var throttleSeekBar: SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,43 +39,46 @@ class MainActivity : AppCompatActivity() {
         connection(ipUser, portUser, connButton)
         disconnection(disconnButton)
 
+       /* joystick.setOnTouchListener {v: View, m: MotionEvent ->
+            joystick.move(m)
+            true
+        }*/
 
-//        var aileron:Float = joystick.getcenterX()
-//        var elevator:Float = joystick.getcenterY()
-        //check this
-//        joystick.onChangeFunc={ fl: Float, fl1: Float -> {
-//            vm.VM_Aileron = fl
-//            vm.VM_Elevator = fl1
-//        }}
+
+
 
         joystick.service = Joystick.JoystickListener{ x, y ->
-                vm.VM_Aileron = x
-                vm.VM_Elevator = y
+            vm.VM_Aileron = x
+            vm.VM_Elevator = y
+        }
+
+        rudderSeekBar.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
+                vm.VM_Rudder = progress.toFloat()/100F //to get range from -1 to 1
             }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
 
-
-
-        val widthRudder: Float = (rudderSeekBar.width.toFloat()
-                - rudderSeekBar.paddingLeft.toFloat()
-                - rudderSeekBar.paddingRight.toFloat())
-        rudderSeekBar.setOnClickListener {
-            vm.VM_Rudder =
-                rudderSeekBar.paddingLeft.toFloat() + widthRudder * rudderSeekBar.progress.toFloat() / rudderSeekBar.max.toFloat();
-        }
-
-        val widthThrottle: Float = (throttleSeekBar.width.toFloat()
-                - throttleSeekBar.paddingLeft.toFloat()
-                - throttleSeekBar.paddingRight.toFloat())
-        throttleSeekBar.setOnClickListener {
-            vm.VM_Throttle =
-                throttleSeekBar.paddingLeft.toFloat() + widthThrottle * throttleSeekBar.progress.toFloat() / throttleSeekBar.max.toFloat();
-        }
-
+        throttleSeekBar.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
+                vm.VM_Throttle = progress.toFloat()/100F //to get range from 0 to 1
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
     }
 
+
     private fun connection(ipUser: EditText, portUser: EditText, connButton: Button) {
-        var ip: String = ""
-        var port: String = ""
+        var ip = ""
+        var port = ""
         ipUser.setOnClickListener {
             ip = ipUser.text.toString()
         }
@@ -91,3 +98,4 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+

@@ -16,7 +16,7 @@ class Joystick : View {
     private var bigRadius:Float = 0F
     private var littleRadius:Float = 0F
     lateinit var canvas: Canvas
-//    var onChangeFunc : (Float, Float) -> Unit = { _: Float, _: Float -> {}}
+
     fun interface JoystickListener {
        fun onChange(x: Float, y: Float) : Unit
     }
@@ -42,17 +42,17 @@ class Joystick : View {
 
     private fun drawJoystick(x:Float, y:Float) {
         var paint = Paint()
-        paint.color = Color.BLACK
-        canvas.drawCircle(x, y, bigRadius, paint)
         paint.color = Color.GRAY
-        canvas.drawCircle(x, y, littleRadius, paint)
-
+        this.canvas.drawCircle(x, y, littleRadius, paint)
     }
 
     override fun onDraw(canvas: Canvas) {
         this.canvas = canvas
-        super.onDraw(canvas)
+        super.onDraw(this.canvas)
+        var paint = Paint()
+        paint.color = Color.BLACK
         setup(width.toFloat(), height.toFloat())
+        this.canvas.drawCircle(centerX, centerY, bigRadius, paint)
         drawJoystick(centerX, centerY)
     }
 
@@ -69,6 +69,7 @@ class Joystick : View {
     }
 
     private fun checkValidMove(x:Float, y:Float) {
+
         val distance =
             sqrt((x - centerX).toDouble().pow(2.0) + (y - centerY).toDouble().pow(2.0))
                 .toFloat()
@@ -82,19 +83,43 @@ class Joystick : View {
             val constrainedY: Float = centerY + (y - centerY) * ratio
             updateValues(constrainedX, constrainedY)
             drawJoystick(constrainedX, constrainedY)
-//            onChangeFunc(constrainedX,constrainedY)
             service.onChange(constrainedX,constrainedY)
         }
     }
+
+
+    override fun performClick(): Boolean {
+        // do what you want
+        return true
+    }
+
+
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if(event == null) {
             return true;
         }
         when (event?.action) {
-            MotionEvent.ACTION_MOVE -> checkValidMove(event.x, event.y)
+            MotionEvent.ACTION_DOWN-> {
+                checkValidMove(event.x, event.y)
+            }
         }
         return true;
     }
 
+    /*public fun move(event: MotionEvent) {
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN-> {
+                    checkValidMove(event.x, event.y)
+                }
+                MotionEvent.ACTION_UP-> {
+                    checkValidMove(event.x, event.y)
+                }
+                MotionEvent.ACTION_MOVE-> {
+                    checkValidMove(event.x, event.y)
+                }
+
+            }
+
+    }*/
 }
