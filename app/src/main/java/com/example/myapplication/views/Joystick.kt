@@ -17,18 +17,11 @@ class Joystick : View {
     private var littleRadius:Float = 0F
     lateinit var canvas: Canvas
 
-    fun interface JoystickListener {
+    interface JoystickListener {
         fun onChange(x: Float, y: Float)
     }
 
     public lateinit var service:JoystickListener
-
-    private fun setup(width:Float, height:Float) {
-        this.centerX = (width / 2)
-        this.centerY = (height / 2)
-        this.bigRadius = (min(width, height) / 2)
-        this.littleRadius = (min(width, height) / 6)
-    }
 
     constructor(context: Context) : super(context) {
     }
@@ -40,9 +33,39 @@ class Joystick : View {
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
     }
 
+    private fun setup(width:Float, height:Float) {
+        this.centerX = (width / 2)
+        this.centerY = (height / 2)
+        this.bigRadius = (min(width, height) / 2)
+        this.littleRadius = (min(width, height) / 6)
+    }
+
+    private fun drawJoystick(x:Float, y:Float) {
+        var paint = Paint()
+        paint.color = Color.BLACK
+        canvas.drawCircle(x, y, bigRadius, paint)
+        paint.color = Color.GRAY
+        canvas.drawCircle(x, y, littleRadius, paint)
+
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        this.canvas = canvas
+        super.onDraw(canvas)
+        setup(width.toFloat(), height.toFloat())
+        drawJoystick(centerX, centerY)
+    }
+
     private fun updateValues(x:Float, y:Float) {
         this.centerX = x
         this.centerY = y
+    }
+
+    fun getcenterX():Float {
+        return this.centerX
+    }
+    fun getcenterY():Float {
+        return this.centerY
     }
 
     private fun checkValidMove(x:Float, y:Float) {
@@ -63,29 +86,6 @@ class Joystick : View {
         }
     }
 
-    private fun drawJoystick(x:Float, y:Float) {
-        var paint = Paint()
-        paint.color = Color.BLACK
-        canvas.drawCircle(x, y, bigRadius, paint)
-        paint.color = Color.GRAY
-        canvas.drawCircle(x, y, littleRadius, paint)
-
-    }
-
-    override fun onDraw(canvas: Canvas) {
-        this.canvas = canvas
-        super.onDraw(canvas)
-        setup(width.toFloat(), height.toFloat())
-        drawJoystick(centerX, centerY)
-    }
-
-    override fun setOnTouchListener(l: OnTouchListener?) {
-        super.setOnTouchListener(l)
-
-    }
-
-
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if(event == null) {
             return true;
@@ -95,9 +95,5 @@ class Joystick : View {
         }
         return true;
     }
-
-
-
-
 
 }

@@ -8,64 +8,84 @@ import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.viewModel.ControlsViewModel
 
 class MainActivity : AppCompatActivity() {
+    var vm = ControlsViewModel()
+
     private lateinit var binding: ActivityMainBinding     // variable that we shall initialize at a later point in code
-    var ip:String=""
-    var port:String=""
-    lateinit var ipUser:EditText
-    lateinit var portUser:EditText
+
+    lateinit var ipUser: EditText
+    lateinit var portUser: EditText
     lateinit var connButton: Button
     lateinit var disconnButton: Button
     lateinit var joystick: Joystick
+    lateinit var rudderSeekBar: SeekBar
+    lateinit var throttleSeekBar: SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        var v = ControlsViewModel()
 
         portUser = findViewById(R.id.portText)
         ipUser = findViewById(R.id.ipText)
         connButton = findViewById(R.id.ConnectButton)
         disconnButton = findViewById(R.id.disconnectButton)
         joystick = findViewById(R.id.joystickView)
+        rudderSeekBar = findViewById(R.id.rudder)
+        throttleSeekBar = findViewById(R.id.throttle)
 
-        ipUser.setOnClickListener{
-           ip = ipUser.text.toString()
+        connection(ipUser, portUser, connButton)
+        disconnection(disconnButton)
+        moveRudder(rudderSeekBar)
+        moveThrottle(throttleSeekBar)
+
+        var aileron:Float = joystick.getcenterX()
+        var elevator:Float = joystick.getcenterY()
+
+        joystick.service.onChange(aileron, elevator) -> {
+            vm.VM_Aileron = aileron
+            vm.VM_Elevator = elevator
+        }
+
+
+
+    }
+
+    private fun connection(ipUser: EditText, portUser: EditText, connButton: Button) {
+        var ip: String = ""
+        var port: String = ""
+        ipUser.setOnClickListener {
+            ip = ipUser.text.toString()
         }
         portUser.setOnClickListener {
             port = portUser.text.toString()
         }
         connButton.setOnClickListener {
-            var a = ip //for debug
-            var b = port
-            v.VM_Connect(ip, port)
+            vm.VM_Connect(ip, port)
         }
-        disconnButton.setOnClickListener{
-            v.VM_Disconnect()
+    }
+
+    private fun disconnection(disconnButton: Button) {
+        disconnButton.setOnClickListener {
+            vm.VM_Disconnect()
         }
+    }
 
-
-        var widthRudder:Float = (binding.rudder.width.toFloat()
-                - binding.rudder.paddingLeft.toFloat()
-                - binding.rudder.paddingRight.toFloat())
-        binding.rudder.setOnClickListener{
-           v.VM_Rudder = binding.rudder.paddingLeft.toFloat() + widthRudder * binding.rudder.progress.toFloat() / binding.rudder.max.toFloat();
+    private fun moveRudder(rudderSeekBar: SeekBar) {
+        val widthRudder: Float = (rudderSeekBar.width.toFloat()
+                - rudderSeekBar.paddingLeft.toFloat()
+                - rudderSeekBar.paddingRight.toFloat())
+        rudderSeekBar.setOnClickListener {
+            vm.VM_Rudder =
+                rudderSeekBar.paddingLeft.toFloat() + widthRudder * rudderSeekBar.progress.toFloat() / rudderSeekBar.max.toFloat();
         }
-        /*var widthThrottle:Float = (throttle.width.toFloat()
-                - throttle.paddingLeft.toFloat()
-                - throttle.paddingRight.toFloat())
-        binding.throttle.setOnClickListener{
-            binding.throttleUser = binding.throttle.paddingLeft.toFloat() + widthThrottle * throttle.progress.toFloat() / throttle.max.toFloat();
-        }*/
+    }
 
-
-        /*val a:Float
-        val e:Float
-
-        joystick.service.onChange(a, e) = { a, e ->
-            v.VM_Aileron = a
-            v.VM_Elevator = e
-        }*/
-
-
+    private fun moveThrottle(throttleSeekBar: SeekBar) {
+        val widthThrottle: Float = (throttleSeekBar.width.toFloat()
+                - throttleSeekBar.paddingLeft.toFloat()
+                - throttleSeekBar.paddingRight.toFloat())
+        throttleSeekBar.setOnClickListener {
+            vm.VM_Throttle =
+                throttleSeekBar.paddingLeft.toFloat() + widthThrottle * throttleSeekBar.progress.toFloat() / throttleSeekBar.max.toFloat();
+        }
     }
 }
