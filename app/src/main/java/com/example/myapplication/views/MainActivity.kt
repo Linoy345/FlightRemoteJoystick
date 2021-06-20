@@ -34,18 +34,33 @@ class MainActivity : AppCompatActivity() {
 
         connection(ipUser, portUser, connButton)
         disconnection(disconnButton)
-        moveRudder(rudderSeekBar)
-        moveThrottle(throttleSeekBar)
+
 
         var aileron:Float = joystick.getcenterX()
         var elevator:Float = joystick.getcenterY()
         //check this
-        joystick.service.onChange(aileron, elevator) -> {
+        joystick.service.onChange(  aileron, elevator -> {
             vm.VM_Aileron = aileron
             vm.VM_Elevator = elevator
+        })
+
+
+
+        val widthRudder: Float = (rudderSeekBar.width.toFloat()
+                - rudderSeekBar.paddingLeft.toFloat()
+                - rudderSeekBar.paddingRight.toFloat())
+        rudderSeekBar.setOnClickListener {
+            vm.VM_Rudder =
+                rudderSeekBar.paddingLeft.toFloat() + widthRudder * rudderSeekBar.progress.toFloat() / rudderSeekBar.max.toFloat();
         }
 
-
+        val widthThrottle: Float = (throttleSeekBar.width.toFloat()
+                - throttleSeekBar.paddingLeft.toFloat()
+                - throttleSeekBar.paddingRight.toFloat())
+        throttleSeekBar.setOnClickListener {
+            vm.VM_Throttle =
+                throttleSeekBar.paddingLeft.toFloat() + widthThrottle * throttleSeekBar.progress.toFloat() / throttleSeekBar.max.toFloat();
+        }
 
     }
 
@@ -69,23 +84,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun moveRudder(rudderSeekBar: SeekBar) {
-        val widthRudder: Float = (rudderSeekBar.width.toFloat()
-                - rudderSeekBar.paddingLeft.toFloat()
-                - rudderSeekBar.paddingRight.toFloat())
-        rudderSeekBar.setOnClickListener {
-            vm.VM_Rudder =
-                rudderSeekBar.paddingLeft.toFloat() + widthRudder * rudderSeekBar.progress.toFloat() / rudderSeekBar.max.toFloat();
-        }
-    }
 
-    private fun moveThrottle(throttleSeekBar: SeekBar) {
-        val widthThrottle: Float = (throttleSeekBar.width.toFloat()
-                - throttleSeekBar.paddingLeft.toFloat()
-                - throttleSeekBar.paddingRight.toFloat())
-        throttleSeekBar.setOnClickListener {
-            vm.VM_Throttle =
-                throttleSeekBar.paddingLeft.toFloat() + widthThrottle * throttleSeekBar.progress.toFloat() / throttleSeekBar.max.toFloat();
-        }
-    }
 }
