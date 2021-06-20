@@ -15,7 +15,7 @@ class Joystick : View {
     private var centerY:Float = 0F
     private var bigRadius:Float = 0F
     private var littleRadius:Float = 0F
-    lateinit var canvas: Canvas
+//    lateinit var canvas: Canvas
 
     fun interface JoystickListener {
        fun onChange(x: Float, y: Float) : Unit
@@ -43,17 +43,17 @@ class Joystick : View {
     private fun drawJoystick(x:Float, y:Float) {
         var paint = Paint()
         paint.color = Color.GRAY
-        this.canvas.drawCircle(x, y, littleRadius, paint)
     }
 
     override fun onDraw(canvas: Canvas) {
-        this.canvas = canvas
-        super.onDraw(this.canvas)
+//        this.canvas = canvas
+        super.onDraw(canvas)
         var paint = Paint()
         paint.color = Color.BLACK
         setup(width.toFloat(), height.toFloat())
-        this.canvas.drawCircle(centerX, centerY, bigRadius, paint)
-        drawJoystick(centerX, centerY)
+        canvas.drawCircle(centerX, centerY, bigRadius, paint)
+        paint.color = Color.WHITE
+        canvas.drawCircle(x, y, littleRadius, paint)
     }
 
     private fun updateValues(x:Float, y:Float) {
@@ -69,7 +69,6 @@ class Joystick : View {
     }
 
     private fun checkValidMove(x:Float, y:Float) {
-
         val distance =
             sqrt((x - centerX).toDouble().pow(2.0) + (y - centerY).toDouble().pow(2.0))
                 .toFloat()
@@ -104,16 +103,17 @@ class Joystick : View {
                 sqrt((x - centerX).toDouble().pow(2.0) + (y - centerY).toDouble().pow(2.0))
                     .toFloat()
             if(distance < bigRadius) { //valid
-                updateValues(x, y)
-                drawJoystick(x, y)
+//                updateValues(x, y)
+//                drawJoystick(x, y)
                 service.onChange(x,y)
             } else { //invalid - constrain the joystick to the big radius
                 val ratio: Float = bigRadius / distance
                 val constrainedX: Float = centerX + (x - centerX) * ratio
                 val constrainedY: Float = centerY + (y - centerY) * ratio
-                updateValues(constrainedX, constrainedY)
-                drawJoystick(constrainedX, constrainedY)
+//                updateValues(constrainedX, constrainedY)
+//                drawJoystick(constrainedX, constrainedY)
                 service.onChange(constrainedX,constrainedY)
+                invalidate()
             }
 
         } else {
