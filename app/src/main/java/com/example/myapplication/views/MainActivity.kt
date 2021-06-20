@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
         joystick.service = Joystick.JoystickListener{ x, y ->
             vm.VM_Aileron = x
             vm.VM_Elevator = y

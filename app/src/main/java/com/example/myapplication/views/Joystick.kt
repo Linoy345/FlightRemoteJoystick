@@ -93,9 +93,37 @@ class Joystick : View {
         return true
     }
 
-
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        if(event == null) {
+            return true;
+        }
+        if(event.action != MotionEvent.ACTION_UP) {
+            val distance =
+                sqrt((x - centerX).toDouble().pow(2.0) + (y - centerY).toDouble().pow(2.0))
+                    .toFloat()
+            if(distance < bigRadius) { //valid
+                updateValues(x, y)
+                drawJoystick(x, y)
+                service.onChange(x,y)
+            } else { //invalid - constrain the joystick to the big radius
+                val ratio: Float = bigRadius / distance
+                val constrainedX: Float = centerX + (x - centerX) * ratio
+                val constrainedY: Float = centerY + (y - centerY) * ratio
+                updateValues(constrainedX, constrainedY)
+                drawJoystick(constrainedX, constrainedY)
+                service.onChange(constrainedX,constrainedY)
+            }
+
+        } else {
+            updateValues(x, y)
+            drawJoystick(x, y)
+            service.onChange(x,y)
+        }
+        return true;
+    }
+
+
+    /*override fun onTouchEvent(event: MotionEvent): Boolean {
         if(event == null) {
             return true;
         }
@@ -105,7 +133,7 @@ class Joystick : View {
             }
         }
         return true;
-    }
+    }*/
 
     /*public fun move(event: MotionEvent) {
             when (event.actionMasked) {
