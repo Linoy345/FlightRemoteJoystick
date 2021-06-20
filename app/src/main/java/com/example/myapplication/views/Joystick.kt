@@ -16,12 +16,12 @@ class Joystick : View {
     private var bigRadius:Float = 0F
     private var littleRadius:Float = 0F
     lateinit var canvas: Canvas
-
-    interface JoystickListener {
-        fun onChange(x: Float, y: Float)
+//    var onChangeFunc : (Float, Float) -> Unit = { _: Float, _: Float -> {}}
+    fun interface JoystickListener {
+       fun onChange(x: Float, y: Float) : Unit
     }
 
-    public lateinit var service:JoystickListener
+    lateinit var service:JoystickListener
 
     constructor(context: Context) : super(context) {
     }
@@ -82,6 +82,7 @@ class Joystick : View {
             val constrainedY: Float = centerY + (y - centerY) * ratio
             updateValues(constrainedX, constrainedY)
             drawJoystick(constrainedX, constrainedY)
+//            onChangeFunc(constrainedX,constrainedY)
             service.onChange(constrainedX,constrainedY)
         }
     }

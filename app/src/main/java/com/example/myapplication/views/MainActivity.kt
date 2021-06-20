@@ -36,13 +36,18 @@ class MainActivity : AppCompatActivity() {
         disconnection(disconnButton)
 
 
-        var aileron:Float = joystick.getcenterX()
-        var elevator:Float = joystick.getcenterY()
+//        var aileron:Float = joystick.getcenterX()
+//        var elevator:Float = joystick.getcenterY()
         //check this
-        joystick.service.onChange(  aileron, elevator -> {
-            vm.VM_Aileron = aileron
-            vm.VM_Elevator = elevator
-        })
+//        joystick.onChangeFunc={ fl: Float, fl1: Float -> {
+//            vm.VM_Aileron = fl
+//            vm.VM_Elevator = fl1
+//        }}
+
+        joystick.service = Joystick.JoystickListener{ x, y ->
+                vm.VM_Aileron = x
+                vm.VM_Elevator = y
+            }
 
 
 
