@@ -98,6 +98,8 @@ class Joystick : View {
             return true;
         }
         if(event.action != MotionEvent.ACTION_UP) {
+            val x = event.x
+            val y = event.y
             val distance =
                 sqrt((x - centerX).toDouble().pow(2.0) + (y - centerY).toDouble().pow(2.0))
                     .toFloat()
@@ -115,9 +117,11 @@ class Joystick : View {
             }
 
         } else {
-            updateValues(x, y)
-            drawJoystick(x, y)
-            service.onChange(x,y)
+            //val x = event.x
+            //val y = event.y
+           // updateValues(x, y)
+           // drawJoystick(x, y)
+           // service.onChange(x,y)
         }
         return true;
     }
