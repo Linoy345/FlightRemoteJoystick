@@ -1,11 +1,10 @@
 package com.example.myapplication.model
 
+//TODO: check default values
 val DEFAULT_RUDDER = 0f
-val DEFAULT_THROTTLE = 0f
+val DEFAULT_THROTTLE = 0.5f
 val DEFAULT_AILERON = 0f
 val DEFAULT_ELEVATOR = 0f
-
-
 
 /*
     Handle and store plane controls value.
