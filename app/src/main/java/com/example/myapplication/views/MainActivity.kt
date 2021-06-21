@@ -1,5 +1,6 @@
 package com.example.myapplication.views
 import android.os.Bundle
+import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.viewModel.ControlsViewModel
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     private var vm = ControlsViewModel()
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         joystick = findViewById(R.id.joystickView)
         rudderSeekBar = findViewById(R.id.rudder)
         throttleSeekBar = findViewById(R.id.throttle)
-
         connection(ipUser, portUser, connButton)
         disconnection(disconnButton)
 
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         rudderSeekBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
+                rudderSeekBar.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                 vm.VM_Rudder = progress.toFloat()/100F //to get range from -1 to 1
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         throttleSeekBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
+                throttleSeekBar.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                 vm.VM_Throttle = progress.toFloat()/100F //to get range from 0 to 1
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -85,12 +88,19 @@ class MainActivity : AppCompatActivity() {
             port = portUser.text.toString()
         }
         connButton.setOnClickListener {
-            vm.VM_Connect(ip, port)
+            connButton.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+            try {
+                vm.VM_Connect(ip, port)
+                //vm.VM_Connect("172.18.53.46", "6400")
+            } catch (e:Exception){
+                //TODO: print can't connect error to user.
+            }
         }
     }
 
     private fun disconnection(disconnButton: Button) {
         disconnButton.setOnClickListener {
+            disconnButton.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
             vm.VM_Disconnect()
         }
     }
