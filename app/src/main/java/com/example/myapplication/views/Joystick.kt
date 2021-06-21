@@ -54,7 +54,7 @@ class Joystick : View {
         val paint = Paint()
         paint.color = Color.BLACK
         canvas.drawCircle(centerX, centerY, bigRadius, paint)
-        paint.color = Color.WHITE
+        paint.color = Color.GRAY
         canvas.drawCircle(changeX, changeY, littleRadius, paint)
     }
 
@@ -72,16 +72,18 @@ class Joystick : View {
             if(distance < bigRadius) { //valid
                 changeX = x
                 changeY = y
-                service.onChange(changeX,changeY)
-
             } else { //invalid - constrain the joystick to the big radius
                 val ratio = bigRadius / distance
                 val constrainedX = centerX + (x - centerX) * ratio
                 val constrainedY = centerY + (y - centerY) * ratio
                 changeX = constrainedX
                 changeY = constrainedY
-                service.onChange(constrainedX,constrainedY)
             }
+            service.onChange(((changeX - centerX)/bigRadius) ,((changeY - centerY)/bigRadius))
+        } else { //return the joystick to the middle
+            changeX = centerX
+            changeY = centerY
+            service.onChange(0F ,0F)
         }
         invalidate()
         return true;

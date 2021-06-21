@@ -53,10 +53,8 @@
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="38dp"
             android:layout_marginRight="38dp"
-            motion:layout_constraintHorizontal_bias="0.709"
-            motion:layout_constraintVertical_bias="1.0"
-            motion:layout_editor_absoluteX="75dp"
-            motion:layout_editor_absoluteY="328dp" />
+            motion:layout_constraintHorizontal_bias="0.72"
+            motion:layout_constraintVertical_bias="1.0" />
         <Constraint
             android:layout_width="317dp"
             android:layout_height="80dp"
@@ -65,11 +63,72 @@
             android:rotation="-90"
             motion:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="445dp"
-            motion:layout_editor_absoluteX="-115dp"
             android:id="@+id/throttle"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="207dp"
-            android:layout_marginRight="207dp" />
+            android:layout_marginEnd="184dp"
+            android:layout_marginRight="184dp"
+            motion:layout_constraintVertical_bias="1.0" />
+        <Constraint
+            android:layout_marginEnd="28dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="112dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="577dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintHorizontal_bias="1.0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="236dp"
+            motion:layout_constraintVertical_bias="0.0"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="132dp"
+            android:id="@+id/ipText"
+            motion:layout_editor_absoluteX="147dp"
+            motion:layout_editor_absoluteY="110dp" />
+        <Constraint
+            motion:layout_constraintVertical_bias="0.243"
+            android:layout_height="40dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintHorizontal_bias="0.84"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="235dp"
+            android:id="@+id/portText" />
+        <Constraint
+            android:layout_marginEnd="33dp"
+            android:layout_height="78dp"
+            android:layout_marginTop="625dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="28dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintHorizontal_bias="1.0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="325dp"
+            motion:layout_constraintVertical_bias="1.0"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="53dp"
+            android:id="@+id/rudder" />
+        <Constraint
+            motion:layout_constraintVertical_bias="0.0"
+            android:layout_height="53dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="112dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintHorizontal_bias="0.206"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="130dp"
+            android:id="@+id/IP" />
+        <Constraint
+            motion:layout_constraintVertical_bias="0.245"
+            android:layout_height="48dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintHorizontal_bias="0.189"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="100dp"
+            android:id="@+id/Port" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
