@@ -79,7 +79,7 @@ class Joystick : View {
                 changeX = constrainedX
                 changeY = constrainedY
             }
-            service.onChange(((changeX - centerX)/bigRadius) ,((changeY - centerY)/bigRadius))
+            service.onChange(((changeX - centerX)/bigRadius) ,((changeY - centerY)/bigRadius)*-1)
         } else { //return the joystick to the middle
             changeX = centerX
             changeY = centerY
