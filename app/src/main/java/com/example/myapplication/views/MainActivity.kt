@@ -86,17 +86,12 @@ class MainActivity : AppCompatActivity() {
     private fun connection(ipUser: EditText, portUser: EditText, connButton: Button) {
         var ip = ""
         var port = ""
-        ipUser.setOnClickListener {
-            ip = ipUser.text.toString()
-        }
-        portUser.setOnClickListener {
-            port = portUser.text.toString()
-        }
         connButton.setOnClickListener {
+            ip = ipUser.text.toString()
+            port = portUser.text.toString()
             connButton.performHapticFeedback(HapticFeedbackConstants.CONFIRM)
             try {
                 vm.VM_Connect(ip, port)
-//                vm.VM_Connect("172.19.3.238", "6400")
             } catch (e:Exception){
                 alertMessage("Connection error", "Warning")
             }
