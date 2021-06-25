@@ -1,10 +1,10 @@
 package com.example.myapplication.model
 
 //TODO: check default values
-val DEFAULT_RUDDER = 0f
-val DEFAULT_THROTTLE = 0.5f
-val DEFAULT_AILERON = 0f
-val DEFAULT_ELEVATOR = 0f
+const val DEFAULT_RUDDER = 0f
+const val DEFAULT_THROTTLE = 0.0f
+const val DEFAULT_AILERON = 0f
+const val DEFAULT_ELEVATOR = 0f
 
 /*
     Handle and store plane controls value.
@@ -50,16 +50,16 @@ class FlightControls {
 */
     fun constructSetMessage(part :String) : String{
         if(part == "rudder"){
-            return "set/controls/flight/rudder " + this.rudder +"\r\n"
+            return "set /controls/flight/rudder " + this.rudder.toString() +"\r\n"
         }
         if(part == "throttle"){
-            return "set/controls/engines/current-engine/throttle " + this.throttle +"\r\n"
+            return "set /controls/engines/current-engine/throttle " + this.throttle.toString() +"\r\n"
         }
         if(part == "aileron"){
-            return "set/controls/flight/aileron " + this.joystick.first +"\r\n"
+            return "set /controls/flight/aileron " + this.joystick.first.toString() +"\r\n"
         }
         if(part == "elevator"){
-            return "set/controls/flight/elevator " + this.joystick.second +"\r\n"
+            return "set /controls/flight/elevator " + this.joystick.second.toString() +"\r\n"
         }
         return ""
     }

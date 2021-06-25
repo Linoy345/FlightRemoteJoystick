@@ -22,8 +22,7 @@ class Joystick : View {
        fun onChange(x: Float, y: Float) : Unit
     }
 
-    lateinit var service:JoystickListener
-
+    var service:JoystickListener =JoystickListener { _, _ ->Unit}
     constructor(context: Context) : super(context) {
     }
 
@@ -62,8 +61,8 @@ class Joystick : View {
         if(event == null) {
             return true;
         }
-        if(event.getActionMasked() == MotionEvent.ACTION_DOWN ||
-            event.getActionMasked() == MotionEvent.ACTION_MOVE)  {
+        if(event.actionMasked == MotionEvent.ACTION_DOWN ||
+            event.actionMasked == MotionEvent.ACTION_MOVE)  {
             val x = event.x
             val y = event.y
             val distance =

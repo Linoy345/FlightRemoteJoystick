@@ -1,6 +1,8 @@
 package com.example.myapplication.views
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.HapticFeedbackConstants
 import android.widget.Button
@@ -26,11 +28,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rudderSeekBar: SeekBar
     private lateinit var throttleSeekBar: SeekBar
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
         portUser = findViewById(R.id.portText)
         ipUser = findViewById(R.id.ipText)
         connButton = findViewById(R.id.ConnectButton)
@@ -42,15 +45,21 @@ class MainActivity : AppCompatActivity() {
         disconnection(disconnButton)
 
         joystick.service = Joystick.JoystickListener{ x, y ->
-            vm.VM_Aileron = x
-            vm.VM_Elevator = y
+            try {
+                vm.VM_Aileron = x
+                vm.VM_Elevator = y
+            }catch (e:Exception){
+            }
         }
 
         rudderSeekBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                 rudderSeekBar.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                vm.VM_Rudder = progress.toFloat()/100F //to get range from -1 to 1
+                    try {
+                        vm.VM_Rudder = progress.toFloat()/100F //to get range from -1 to 1
+                    }catch (e:Exception){
+                    }
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
@@ -62,7 +71,10 @@ class MainActivity : AppCompatActivity() {
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                 throttleSeekBar.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                vm.VM_Throttle = progress.toFloat()/100F //to get range from 0 to 1
+                try {
+                    vm.VM_Throttle = progress.toFloat()/100F //to get range from 0 to 1
+                }catch (e:Exception){
+                }
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
@@ -70,7 +82,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
 
     private fun connection(ipUser: EditText, portUser: EditText, connButton: Button) {
         var ip = ""
@@ -82,36 +93,34 @@ class MainActivity : AppCompatActivity() {
             port = portUser.text.toString()
         }
         connButton.setOnClickListener {
-            connButton.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+            connButton.performHapticFeedback(HapticFeedbackConstants.CONFIRM)
             try {
                 vm.VM_Connect(ip, port)
-                //vm.VM_Connect("172.18.53.46", "6400")
+//                vm.VM_Connect("172.19.3.238", "6400")
             } catch (e:Exception){
-                //TODO: print can't connect error to user.
-                alertMessage()
+                alertMessage("Connection error", "Warning")
             }
         }
     }
 
     private fun disconnection(disconnButton: Button) {
         disconnButton.setOnClickListener {
-            disconnButton.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-            vm.VM_Disconnect()
+            disconnButton.performHapticFeedback(HapticFeedbackConstants.CONFIRM)
+            try {
+                vm.VM_Disconnect()
+            } catch (e: Exception){}
         }
     }
 
-    private fun alertMessage() {
+    private fun alertMessage(header: String, message: String) {
         val dialogBuilder = AlertDialog.Builder(this)
-        dialogBuilder.setMessage("Your ip or port are incorrect\n Please try again") // set message of alert dialog
+        dialogBuilder.setMessage(message) // set message of alert dialog
             .setCancelable(false) // if the dialog is cancelable
-            .setPositiveButton("Exit", DialogInterface.OnClickListener { // positive button text and action
-                    dialog, id -> finish()
-            })
-            .setNegativeButton("Try again", DialogInterface.OnClickListener { // negative button text and action
+            .setNegativeButton("OK", DialogInterface.OnClickListener { // negative button text and action
                     dialog, id -> dialog.cancel()
             })
         val alert = dialogBuilder.create() // create dialog box
-        alert.setTitle("Warning")// set title for alert dialog box
+        alert.setTitle(header)// set title for alert dialog box
         alert.show() // show alert dialog
     }
 }

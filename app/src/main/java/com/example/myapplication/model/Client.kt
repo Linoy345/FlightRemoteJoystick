@@ -1,36 +1,38 @@
 package com.example.myapplication.model
-
+import java.io.IOException
 import java.io.OutputStream
+import java.lang.Exception
 import java.net.InetSocketAddress
 import java.net.Socket
-import java.util.concurrent.Executors
 
-//TODO: Test this class.
 class Client() {
     private  var client: Socket = Socket()
+
     private lateinit var writer: OutputStream
-    constructor(ip: String, port: Int) : this() {
-            client.connect(InetSocketAddress(ip, port))
-            writer = client.getOutputStream()
-    }
     private fun isConnected() :Boolean{
         return client.isConnected
     }
     fun connect(ip: String, port: Int){
         if(!isConnected()) {
-            client.connect(InetSocketAddress(ip, port))
-            writer = client.getOutputStream()
+                client.connect(InetSocketAddress(ip, port))
+                writer = client.getOutputStream()
+                println("Connected")
         }
     }
     fun disconnect(){
         if(this.isConnected()) {
+            writer.close()
             client.close()
+            client = Socket()
         }
     }
-    fun write(message: String){
-        if(this.isConnected()) {
-            val charset = Charsets.US_ASCII
-            writer.write(message.toByteArray(charset))
+    fun write(message: String) {
+        if (isConnected()) {
+            try {
+                writer.write(message.toByteArray())
+            } catch (e: IOException){
+                disconnect()
+            }
         }
     }
 }

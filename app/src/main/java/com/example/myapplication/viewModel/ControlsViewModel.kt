@@ -1,7 +1,6 @@
 package com.example.myapplication.viewModel
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.model.FlightModel
-import java.util.concurrent.Executors
 
 open class ControlsViewModel : ViewModel() {
     var model: FlightModel = FlightModel()

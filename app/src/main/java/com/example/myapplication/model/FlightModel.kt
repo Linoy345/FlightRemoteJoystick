@@ -5,7 +5,7 @@ import java.util.concurrent.Executors
 class FlightModel()  {
     private var simulator: Client= Client()
     private var controlsInfo: FlightControls = FlightControls()
-    private var executor = Executors.newSingleThreadExecutor()
+    private var executor = Executors.newFixedThreadPool(1)
 
     var aileron: Float
          get() {
@@ -46,7 +46,10 @@ class FlightModel()  {
     }
 
     fun setSimulator(part: String) {
-        executor.execute{ this.simulator.write(this.controlsInfo.constructSetMessage(part))}
+        executor.execute{
+            this.simulator.write(this.controlsInfo.constructSetMessage(part))
+//            println(this.controlsInfo.constructSetMessage(part))
+        }
     }
 
     fun resetControls() {
