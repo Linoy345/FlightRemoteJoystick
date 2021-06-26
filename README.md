@@ -25,7 +25,7 @@ Now to use the app- connect to a computer which is currently running Flight Gear
 
 A screenshot is attached:
 
-![Main_Screen.png](Images/Images/Main_Screen.png)
+![App_Main_Screen.jpg](Images/App_Main_Screen.jpg)
 
 Make sure to click the ```Enter/Done``` button after entering IP and Port(once for each one).
 
