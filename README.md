@@ -27,8 +27,6 @@ A screenshot is attached:
 
 ![App_Main_Screen.jpg](Images/App_Main_Screen.jpg)
 
-Make sure to click the ```Enter/Done``` button after entering IP and Port(once for each one).
-
 ## Features
 - ```IP ``` \ ```Port```. You will be asked to enter IP/Port to a computer the currently run Flight Gear.
 - Connect to Flight Gear after entering IP/Port and start controlling the plane.
