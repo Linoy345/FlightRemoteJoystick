@@ -21,12 +21,11 @@ git clone https://github.com/Linoy345/androidApp.git
 
 Now, connect your Android device to your computer and load the app onto your device from your favorate IDE.
 
-Now to use the app- connect to a computer which is currently running Flight Gear and is on the same network as your Android device, then enter
-this computer public IP and Port 6400.
+Now to use the app- connect to a computer which is currently running Flight Gear and is on the same network as your Android device, then enter this computer public IP and the currently open port on Flight Gear.
 
 A screenshot is attached:
 
-![Main_Screen.png](Images/Main_Screen.png)
+![Android App.jpg](Images/Android App.jpg)
 
 Make sure to click the ```Enter/Done``` button after entering IP and Port(once for each one).
 
