@@ -47,7 +47,7 @@ The main files in our project are as follow:
     - MainActivity
 
 ## More documentation
-- UML: at file uml
+- UML: at file uml.png
 
 ## Demo video
 https://www.youtube.com/watch?v=-GeqqV6uwYo
