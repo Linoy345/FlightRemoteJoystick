@@ -47,10 +47,10 @@ The main files in our project are as follow:
     - MainActivity
 
 ## More documentation
-- UML:
+- UML: at file uml
 
 ## Demo video
-https://youtu.be/yFQ_OCXA5P0
+https://www.youtube.com/watch?v=-GeqqV6uwYo
 ## Writers
 - Linoy Sela
 - Yair Yardeni
