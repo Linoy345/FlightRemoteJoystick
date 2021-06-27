@@ -50,7 +50,7 @@ The main files in our project are as follow:
 - UML:
 
 ## Demo video
-https://www.youtube.com/watch?v=Ic3aTA65_wQ
+https://youtu.be/yFQ_OCXA5P0
 ## Writers
 - Linoy Sela
 - Yair Yardeni
